@@ -47,18 +47,18 @@ list.addEventListener('click', e =>{
 const filterTodos = (userInput) => {
     //filter out the todos that do not match the search 
     Array.from(list.children)
-    .filter(todo=>!todo.textContent.includes(userInput))//an array that will include only todos that don't contain the userInput
+    .filter(todo=>!todo.textContent.toLowerCase().includes(userInput))//an array that will include only todos that don't contain the userInput
     .forEach(todo => todo.classList.add('filtered'));//for each list that doesn't contain the search input, this class is added to them in the DOM
 
     //filter out the todos that match the search 
     Array.from(list.children)
-    .filter(todo => todo.textContent.includes(userInput))
+    .filter(todo => todo.textContent.toLowerCase().includes(userInput))
     .forEach(todo => todo.classList.remove('filtered'));
-    
+
 };
 //keyup event
 search.addEventListener('keyup', e=>{
-    const userInput = search.value.trim();
+    const userInput = search.value.trim().toLowerCase();
     filterTodos(userInput);
 });
 
