@@ -1,5 +1,6 @@
 const addForm = document.querySelector('.add');
 const list = document.querySelector('.todos');
+const search = document.querySelector('.search input')
 
 //create a func to add a html template to our html code on the browser
 const generateTemplate = todo=> {
@@ -40,4 +41,27 @@ list.addEventListener('click', e =>{
         e.target.parentElement.remove(); //gets the parent of the element clicked and removes/deletes it
     }
 });
+
+//searching todos
+
+const filterTodos = (userInput) => {
+    //filter out the todos that do not match the search 
+    Array.from(list.children)
+    .filter(todo=>!todo.textContent.includes(userInput))//an array that will include only todos that don't contain the userInput
+    .forEach(todo => todo.classList.add('filtered'));//for each list that doesn't contain the search input, this class is added to them in the DOM
+
+    //filter out the todos that match the search 
+    Array.from(list.children)
+    .filter(todo => todo.textContent.includes(userInput))
+    .forEach(todo => todo.classList.remove('filtered'));
+    
+};
+//keyup event
+search.addEventListener('keyup', e=>{
+    const userInput = search.value.trim();
+    filterTodos(userInput);
+});
+
+
+
 
